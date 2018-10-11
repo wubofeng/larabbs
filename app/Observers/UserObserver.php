@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Topic;
 use App\Models\User;
 
 // creating, created, updating, updated, saving,
@@ -21,7 +22,8 @@ class UserObserver
 
     public function deleted(User $user)
     {
-        \DB::table('topics')->where('user_id', $user->id)->delete();
+
+        Topic::where('user_id', $user->id)->delete();
         \DB::table('replies')->where('user_id', $user->id)->delete();
     }
 
